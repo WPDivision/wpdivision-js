@@ -1,0 +1,15 @@
+{
+    "name": "@wpdivision/wpdivision-js",
+    "version": "1.0.0",
+    "description": "Base JS modules - base classes and function.",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/WPDivision/wpdivision-js.git"
+    },
+    "author": "WPDivision",
+    "license": "MIT",
+    "homepage": "https://github.com/WPDivision"
+}
