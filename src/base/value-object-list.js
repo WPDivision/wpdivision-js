@@ -5,13 +5,13 @@ class ValueObjectList {
      */
     constructor(data) {
         if (data === undefined) {
-            throw new Error('ValueObjectList constructor expects array, undefined value provided.');
+            throw new Error('WPDivision error: ValueObjectList constructor expects array, undefined value provided.');
         }
         if (data === null) {
-            throw new Error('ValueObjectList constructor expects array, null value provided.');
+            throw new Error('WPDivision error: ValueObjectList constructor expects array, null value provided.');
         }
         if (!Array.isArray(data)) {
-            throw new Error('ValueObjectList constructor expects array.');
+            throw new Error('WPDivision error: ValueObjectList constructor expects array.');
         }
     }
 
@@ -39,6 +39,6 @@ class ValueObjectList {
 }
 
 /**
- * Exports
+ * Module exports
  */
 export {ValueObjectList};

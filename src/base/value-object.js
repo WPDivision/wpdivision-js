@@ -7,22 +7,22 @@ class ValueObject {
      */
     constructor(data) {
         if (data === undefined) {
-            throw new Error('ValueObject constructor must be object, undefined value provided.');
+            throw new Error('WPDivision error: ValueObject constructor must be object, undefined value provided.');
         }
 
         if (data === null) {
-            throw new Error('ValueObject constructor must be object, null value provided.');
+            throw new Error('WPDivision error: ValueObject constructor must be object, null value provided.');
         }
 
         if (data instanceof Function) {
-            throw new Error('ValueObject constructor must be object, function provided.');
+            throw new Error('WPDivision error: ValueObject constructor must be object, function provided.');
         }
     }
 
     /**
      */
     toObject() {
-        throw new Error('This method must be implemented in the inherited class');
+        throw new Error('WPDivision error: This method must be implemented in the inherited class');
     }
 
     /**
@@ -51,6 +51,6 @@ class ValueObject {
 }
 
 /**
- * Exports
+ * Module exports
  */
 export {ValueObject};
