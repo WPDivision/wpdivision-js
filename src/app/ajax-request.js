@@ -117,7 +117,7 @@ class AjaxRequest {
         /**
          * AjaxCall Call using POST
          */
-        AjaxCall.fetch('POST', configVO.ajaxRemoteURL, JSON.stringify(body), headers).then(
+        AjaxCall.fetch('POST', configVO.apiUrl, JSON.stringify(body), headers).then(
             response => {
                 let code = response.responseCode;
                 let data = response.responseBody;
