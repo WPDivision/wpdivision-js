@@ -26,8 +26,8 @@ class Processor {
             }
 
             if (!empty(ajaxResponse.responseError)) {
-                Application.notificationError.message = ajaxResponse.responseError;
-                Application.notificationSuccess.message = '';
+                Application.notificationError(ajaxResponse.responseError);
+                Application.notificationSuccess('');
             }
 
             if (callbackFunction instanceof Function) {

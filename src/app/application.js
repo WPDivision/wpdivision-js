@@ -8,22 +8,24 @@ class Application {
     static #configVO;
 
     /**
-     * @type {NotificationVO} #notificationSuccess
+     * @type {function(string|NotificationVO)} #notificationSuccess
      */
-    static notificationSuccess;
+    static notificationSuccess = (message) => {
+        throw new Error('WPDivision error: notificationSuccess callback function must be implemented in the application.');
+    };
 
     /**
-     * @type {NotificationVO} #notificationError
+     * @type {function(string|NotificationVO)} #notificationError
      */
-    static notificationError;
+    static notificationError = (message) => {
+        throw new Error('WPDivision error: notificationError callback function must be implemented in the application.');
+    };
 
     /**
      * @param {ConfigVO} configVO
      */
     static init(configVO) {
         Application.#configVO = configVO;
-        Application.notificationSuccess = new NotificationVO({});
-        Application.notificationError = new NotificationVO({});
     }
 
     /**
