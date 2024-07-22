@@ -1,5 +1,6 @@
 import {empty, navigateTo} from '../base/utils';
 import {AjaxRequest} from './ajax-request';
+import {Application} from "./application";
 
 class Processor {
 
@@ -13,6 +14,10 @@ class Processor {
     constructor() {
         if (empty(Processor.application)) {
             throw new Error('WPDivision error: Application Object is not defined. Please set correct object reference in the application bootstrap.');
+        }
+
+        if (Processor.application.constructor !== Application.constructor) {
+            throw new Error('WPDivision error: Application object type is not correct.');
         }
     }
 
