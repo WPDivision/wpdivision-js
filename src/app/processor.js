@@ -1,12 +1,35 @@
 import {empty, navigateTo} from '../base/utils';
 import {AjaxRequest} from './ajax-request';
-import {Application} from './application';
 
 class Processor {
 
+    /**
+     * @type {Application} application
+     */
+    static #application;
+
+    /**
+     */
     constructor() {
-        //
+        if (empty(Processor.application)) {
+            throw new Error('WPDivision error: Application Object is not defined. Please set correct object reference in the application bootstrap.');
+        }
     }
+
+    /**
+     * @param {Application} application
+     */
+    static set application(application) {
+        this.#application = application;
+    }
+
+    /**
+     * @return {Application}
+     */
+    static get application() {
+        return this.#application;
+    }
+
 
     /**
      * @param {string} actionName
@@ -14,9 +37,8 @@ class Processor {
      * @param {function(AjaxResponse)} callbackFunction
      */
     actionCall(actionName, valueObject, callbackFunction) {
-
         const ajaxRequest = new AjaxRequest(
-            Application.config()
+            Processor.application.config()
         );
 
         ajaxRequest.call(actionName, valueObject.toObject(), (ajaxResponse) => {
@@ -26,8 +48,8 @@ class Processor {
             }
 
             if (!empty(ajaxResponse.responseError)) {
-                Application.notificationError(ajaxResponse.responseError);
-                Application.notificationSuccess('');
+                Processor.application.notificationError(ajaxResponse.responseError);
+                Processor.application.notificationSuccess('');
             }
 
             if (callbackFunction instanceof Function) {
