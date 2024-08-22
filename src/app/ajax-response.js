@@ -67,7 +67,7 @@ class AjaxResponse {
     }
 
     /**
-     * @return {Object[]}
+     * @return {string}
      */
     get responseError() {
         return this.#responseError;
