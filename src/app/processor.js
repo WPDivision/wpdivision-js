@@ -12,11 +12,11 @@ class Processor {
     /**
      */
     constructor() {
-        if (empty(Processor.configVO)) {
+        if (empty(Processor.config)) {
             throw new Error('WPDivision error: Processor config is not defined. Please set correct object reference in the application bootstrap.');
         }
 
-        if (Processor.configVO.constructor !== ConfigVO.constructor) {
+        if (!(Processor.config instanceof ConfigVO)) {
             throw new Error('WPDivision error: Config object type is not correct.');
         }
     }
