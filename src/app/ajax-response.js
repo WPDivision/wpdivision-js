@@ -16,7 +16,7 @@ class AjaxResponse {
     #responseURL = null;
 
     /**
-     * @type {string} responseError
+     * @type {Array.<string>} responseError
      */
     #responseError = null;
 
@@ -45,6 +45,10 @@ class AjaxResponse {
             throw new Error('WPDivision error: response property [url] is missing.');
         }
 
+        if (!Array.isArray(response.error)) {
+            throw new Error('WPDivision error: response property [error] must be array.');
+        }
+
         this.#responseName = response.name;
         this.#responseData = response.data;
         this.#responseURL = response.url;
@@ -67,7 +71,7 @@ class AjaxResponse {
     }
 
     /**
-     * @return {string}
+     * @return {Array.<string>}
      */
     get responseError() {
         return this.#responseError;
