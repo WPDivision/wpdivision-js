@@ -9,6 +9,15 @@ import {AjaxResponse} from "./ajax-response";
  */
 class AjaxRequest {
 
+    static P_NAME = 'name';
+    static P_DATA = 'data';
+    static P_STATE = 'state';
+    static P_ID = 'id';
+    //
+    static P_X_WPD_ORIGIN = 'x-wpd-origin';
+    static P_X_WPD_TOKEN = 'x-wpd-token';
+    static P_X_WPD_DELTA = 'x-wpd-delta';
+
     /**
      * @type {string} actionName
      */
@@ -101,17 +110,17 @@ class AjaxRequest {
         const configVO = this.#configVO;
 
         const body = {
-            'name': this.#actionName,
-            'data': this.#actionData,
-            'state': configVO.stateToken,
-            'id': requestId
+            [AjaxRequest.P_NAME]: this.#actionName,
+            [AjaxRequest.P_DATA]: this.#actionData,
+            [AjaxRequest.P_STATE]: configVO.stateToken,
+            [AjaxRequest.P_ID]: requestId
         };
 
         const headers = {
             'Content-Type': 'application/json; charset=utf-8',
-            'x-wpd-origin': window.location.href,
-            'x-wpd-token': this.#generateToken(...configVO.tokenBase),
-            'x-wpd-delta': Math.floor(Date.now() / 1000) + configVO.timeDelta,
+            [AjaxRequest.P_X_WPD_ORIGIN]: window.location.href,
+            [AjaxRequest.P_X_WPD_TOKEN]: this.#generateToken(...configVO.tokenBase),
+            [AjaxRequest.P_X_WPD_DELTA]: Math.floor(Date.now() / 1000) + configVO.timeDelta,
         };
 
         /**
@@ -142,7 +151,11 @@ class AjaxRequest {
                     if (empty(ajaxResponse.responseError)) {
                         if ((ajaxResponse.responseId !== requestId) ||
                             (ajaxResponse.responseName !== this.#actionName)) {
-                            ajaxResponse = new AjaxResponse(...data, {error: 'Request failed. No valid response format returned.'});
+
+                            ajaxResponse = new AjaxResponse({
+                                ...data,
+                                error: ['Request failed. No valid response format returned.']
+                            });
                         }
                     }
 

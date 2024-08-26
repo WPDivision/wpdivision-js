@@ -1,38 +1,38 @@
 import {empty, navigateTo} from '../base/utils';
 import {AjaxRequest} from './ajax-request';
-import {Application} from "./application";
+import {ConfigVO} from './config-vo';
 
 class Processor {
 
     /**
-     * @type {Application} application
+     * @type {ConfigVO} configVO
      */
-    static #application;
+    static #configVO;
 
     /**
      */
     constructor() {
-        if (empty(Processor.application)) {
-            throw new Error('WPDivision error: Application Object is not defined. Please set correct object reference in the application bootstrap.');
+        if (empty(Processor.configVO)) {
+            throw new Error('WPDivision error: Processor config is not defined. Please set correct object reference in the application bootstrap.');
         }
 
-        if (Processor.application.constructor !== Application.constructor) {
-            throw new Error('WPDivision error: Application object type is not correct.');
+        if (Processor.configVO.constructor !== ConfigVO.constructor) {
+            throw new Error('WPDivision error: Config object type is not correct.');
         }
     }
 
     /**
-     * @param {Application} application
+     * @param {ConfigVO} configVO
      */
-    static set application(application) {
-        this.#application = application;
+    static set config(configVO) {
+        this.#configVO = configVO;
     }
 
     /**
-     * @return {Application}
+     * @return {ConfigVO}
      */
-    static get application() {
-        return this.#application;
+    static get config() {
+        return this.#configVO;
     }
 
 
@@ -42,19 +42,15 @@ class Processor {
      * @param {function(AjaxResponse)} callbackFunction
      */
     actionCall(actionName, valueObject, callbackFunction) {
+
         const ajaxRequest = new AjaxRequest(
-            Processor.application.config()
+            Processor.config
         );
 
         ajaxRequest.call(actionName, valueObject.toObject(), (ajaxResponse) => {
             if (!empty(ajaxResponse.responseURL)) {
                 navigateTo(ajaxResponse.responseURL);
                 return;
-            }
-
-            if (!empty(ajaxResponse.responseError)) {
-                Processor.application.notificationError(ajaxResponse.responseError);
-                Processor.application.notificationSuccess('');
             }
 
             if (callbackFunction instanceof Function) {

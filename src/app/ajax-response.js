@@ -37,12 +37,16 @@ class AjaxResponse {
             throw new Error('WPDivision error: response property [data] is missing.');
         }
 
-        if (!response.hasOwnProperty('error')) {
-            throw new Error('WPDivision error: response property [error] is missing.');
-        }
-
         if (!response.hasOwnProperty('url')) {
             throw new Error('WPDivision error: response property [url] is missing.');
+        }
+
+        if (!response.hasOwnProperty('id')) {
+            throw new Error('WPDivision error: response property [id] is missing.');
+        }
+
+        if (!response.hasOwnProperty('error')) {
+            throw new Error('WPDivision error: response property [error] is missing.');
         }
 
         if (!Array.isArray(response.error)) {

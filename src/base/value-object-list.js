@@ -7,9 +7,11 @@ class ValueObjectList {
         if (data === undefined) {
             throw new Error('WPDivision error: ValueObjectList constructor expects array, undefined value provided.');
         }
+
         if (data === null) {
             throw new Error('WPDivision error: ValueObjectList constructor expects array, null value provided.');
         }
+
         if (!Array.isArray(data)) {
             throw new Error('WPDivision error: ValueObjectList constructor expects array.');
         }
